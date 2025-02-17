@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 class User extends Sequelize.Model {
-  static initate(sequelize) {
+  static initiate(sequelize) {
     User.init({
       name: {
         type: Sequelize.STRING(20),
@@ -38,7 +38,9 @@ class User extends Sequelize.Model {
     });
   }
 
-  static associate(db) {};
+  static associate(db) {
+    db.User.hasMany(db.Comment, {foreignKey: "commenter", sourceKey: "id"});
+  };
 }
 
-models.exports = User;
+module.exports = User;
